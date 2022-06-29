@@ -20,7 +20,7 @@ public class HomeController {
 	@Autowired
 	private IntCategorias serviceCategorias;
 	
-	@GetMapping ("/home")
+	@GetMapping ("/")
 	public String mostrarHome(Model model) {
 		List<Vacante> lista = serviceVacantes.obtenerTodas();
 		List<Categoria> categorias = serviceCategorias.obtenerTodas();
