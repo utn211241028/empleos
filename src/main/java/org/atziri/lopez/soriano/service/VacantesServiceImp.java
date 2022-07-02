@@ -31,7 +31,7 @@ public class VacantesServiceImp implements IntVacantes {
 			v1.setSalario(304.70);
 			v1.setEstatus("Creada");
 			v1.setDestacado(1);
-			v1.setImagen("https://raw.githubusercontent.com/utn211241028/empleos/31f77d426b6d41ffbabacd31679f4c8bf802c679/empleos/img-vacantes/no-image.png");
+			v1.setImagen("https://raw.githubusercontent.com/utn211241028/empleos/31f77d426b6d41ffbabacd31679f4c8bf802c679/empleos/img-vacantes/logo10.png");
 			v1.setDetalles("<h2>Ofrecemos</h2>"
 					+ "<ul><li>Salario atractivo</li>"
 					+ "<li>Oportunidad de desarrollo</li></ul>");
