@@ -49,7 +49,7 @@ public class VacantesServiceImp implements IntVacantes {
 			v2.setSalario(500.50);
 			v2.setEstatus("Creada");
 			v2.setDestacado(1);
-			v2.setImagen("https://raw.githubusercontent.com/utn211241028/empleos/blob/31f77d426b6d41ffbabacd31679f4c8bf802c679/empleos/img-vacantes/logo11.png");
+			v2.setImagen("https://raw.githubusercontent.com/utn211241028/empleos/31f77d426b6d41ffbabacd31679f4c8bf802c679/empleos/img-vacantes/logo11.png");
 			v2.setDetalles("<h2>Ofrecemos</h2>"
 					+ "<ul><li>Salario atractivo</li>"
 					+ "<li>Oportunidad de desarrollo</li></ul>");
@@ -67,7 +67,7 @@ public class VacantesServiceImp implements IntVacantes {
 			v3.setSalario(708.90);
 			v3.setEstatus("Creada");
 			v3.setDestacado(1);
-			v3.setImagen("logo8.png");
+			v3.setImagen("https://raw.githubusercontent.com/utn211241028/empleos/31f77d426b6d41ffbabacd31679f4c8bf802c679/empleos/img-vacantes/logo14.png");
 			v3.setDetalles("<h2>Ofrecemos</h2>"
 					+ "<ul><li>Salario atractivo</li>"
 					+ "<li>Oportunidad de desarrollo</li></ul>");
