@@ -81,7 +81,7 @@ public class VacantesController {
 		}
 		if(!multiPart.isEmpty()) {
 			//String ruta = "empleos/img-vacantes/"; // Linux/MAC
-			String ruta = "https://github.com/utn211241028/empleos/tree/31f77d426b6d41ffbabacd31679f4c8bf802c679/empleos/img-vacantes"; //Windows
+			String ruta = "../utn211241028/empleos/tree/31f77d426b6d41ffbabacd31679f4c8bf802c679/empleos/img-vacantes"; //Windows
 			String nombreImagen = Utileria.guardarArchivo(multiPart, ruta);
 			if(nombreImagen != null) { // La imagen si se subio
 				// Procesamos la variable nombreImagen
