@@ -12,7 +12,7 @@ public class Vacante {
 	private LocalDate fecha = LocalDate.now();
 	private String estatus;
 	private Integer destacado;
-	private String imagen = "no-image.png";
+	private String imagen = "https://raw.githubusercontent.com/utn211241028/empleos/31f77d426b6d41ffbabacd31679f4c8bf802c679/empleos/img-vacantes/no-image.png";
 	private String detalles;
 	private Categoria categoria;
 	
