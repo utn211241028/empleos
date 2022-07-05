@@ -71,7 +71,7 @@ public class VacantesController {
 		return "vacantes/formVacante";
 	}
 	
-	/*@PostMapping("/guardar")
+	@PostMapping("/guardar")
 	public String guardar(@Valid Vacante vacante, BindingResult result, @RequestParam("archivoImagen") MultipartFile multiPart) {
 		System.out.println(vacante);
 		if(result.hasErrors()) {
@@ -94,37 +94,6 @@ public class VacantesController {
 		vacante.setCategoria(categoriasService.buscarPorId(vacante.getCategoria().getId()));
 		vacantesService.guardar(vacante);
 		return "redirect:/vacante/index";
-	}*/
-	
-	@PostMapping("/guardar")
-	public String guardar(
-			@Valid
-			Vacante vacante, 
-			BindingResult result,
-			RedirectAttributes model) {
-		if(result.hasErrors()) {
-			System.out.println("Error");
-			return "vacantes/formVacante";
-		}else {
-		//System.out.println(categoria);
-		if ( vacante.getId() == null) {
-			int index = vacantesService.obtenerTodas().size()-1;
-			Vacante aux = vacantesService.obtenerTodas().get(index);
-			vacante.setId(aux.getId()+1);
-			model.addFlashAttribute("msg", "Se guardo la vacante");
-			vacantesService.guardar(vacante);
-		}else {
-			int posicion = vacantesService.buscarPosicion(vacante);
-			//System.out.println(posicion);
-			model.addFlashAttribute("msg", "Se modificó la vacante");
-			vacantesService.modificar(posicion, vacante);
-		}
-	/*	categoria.setId(categoriaService.obtenerTodas().size()+1);
-		System.out.println(categoria);
-		categoriaService.agregar(categoria);*/
-		
-		return "redirect:/vacante/index";
-		}
 	}
 	
 	@InitBinder
