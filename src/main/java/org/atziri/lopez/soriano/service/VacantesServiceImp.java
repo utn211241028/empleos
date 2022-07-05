@@ -99,7 +99,7 @@ public class VacantesServiceImp implements IntVacantes {
 	public void eliminar(Integer idVacante) {
 		lista.remove(buscarPorId(idVacante));
 	}
-
+	
 	@Override
 	public Vacante buscarPorId(Integer idVacante) {
 		for(Vacante v : lista) {
@@ -114,5 +114,24 @@ public class VacantesServiceImp implements IntVacantes {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public void modificar(Integer posicion, Vacante vacante) {
+		lista.set(posicion, vacante);
+		
+	}
+
+	public int buscarPosicion(Vacante vacante) {
+		int index = 0; Vacante aux = null;
+		int posicion = -1;
+		while(index < lista.size()) {
+			aux = lista.get(index);
+			if(aux.getId()==vacante.getId()) {
+				posicion= index;
+				break;
+		} index++;
+		
+	} return posicion;
+}
 
 }
