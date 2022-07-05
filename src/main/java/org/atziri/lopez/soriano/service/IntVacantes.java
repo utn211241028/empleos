@@ -11,5 +11,6 @@ public interface IntVacantes {
 	public void eliminar(Integer idVacante);
 	public Vacante buscarPorId(Integer idVacante);
 	public long numeroVacantes();
-
+	public void modificar(Integer posicion, Vacante vacante);
+	public int buscarPosicion(Vacante vacante);
 }
