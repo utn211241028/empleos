@@ -71,7 +71,7 @@ public class VacantesController {
 		return "vacantes/formVacante";
 	}
 	
-	/*@PostMapping("/guardar")
+	@PostMapping("/guardar")
 	public String guardar(@Valid Vacante vacante, BindingResult result, @RequestParam("archivoImagen") MultipartFile multiPart) {
 		System.out.println(vacante);
 		if(result.hasErrors()) {
@@ -95,9 +95,9 @@ public class VacantesController {
 		vacantesService.guardar(vacante);
 		return "redirect:/vacante/index";
 	}
-	*/
 	
-	@PostMapping("/guardar")
+	
+	/*@PostMapping("/guardar")
 	public String guardar(
 			@Valid
 			Vacante vacante, 
@@ -123,11 +123,11 @@ public class VacantesController {
 	/*	categoria.setId(categoriaService.obtenerTodas().size()+1);
 		System.out.println(categoria);
 		categoriaService.agregar(categoria);*/
-		
-		return "redirect:/vacante/index";
-	}
-	}
 	
+	/*	return "redirect:/vacante/index";
+	}
+	}
+	*/
 	@InitBinder
 	protected void  initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport(){
