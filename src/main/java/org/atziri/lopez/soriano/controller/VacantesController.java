@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.atziri.lopez.soriano.model.Categoria;
 import org.atziri.lopez.soriano.model.Vacante;
 import org.atziri.lopez.soriano.service.IntCategorias;
 import org.atziri.lopez.soriano.service.IntVacantes;
@@ -26,7 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 @Controller
 @RequestMapping("/vacante")
