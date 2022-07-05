@@ -109,4 +109,11 @@ public class VacantesController {
 			}
 		});
 	}
+	
+	@GetMapping("/buscar")
+	public String buscar(@RequestParam("id") int idVacante, Model model) {
+		Vacante vacante = vacantesService.buscarPorId(idVacante);
+		model.addAttribute("vacante", vacante);
+		return "vacantes/formVacante";
+	}
 }
