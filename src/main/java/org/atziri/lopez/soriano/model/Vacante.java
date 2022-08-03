@@ -2,18 +2,34 @@ package org.atziri.lopez.soriano.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
+@Entity
+@Table(name="Vacantes")
 public class Vacante {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nombre;
 	private String descripcion;
 	private LocalDate fecha = LocalDate.now();
 	private String estatus;
 	private Integer destacado;
-	private String imagen = "https://raw.githubusercontent.com/utn211241028/empleos/31f77d426b6d41ffbabacd31679f4c8bf802c679/empleos/img-vacantes/no-image.png";
+	private String imagen = "no-image.png";
 	private String detalles;
+	
+	
+	@ManyToOne(cascade= {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
+	@JoinColumn(name="idCategoria")
 	private Categoria categoria;
 	
 	@Min(value=0, message="No puede ser negativo")
@@ -82,13 +98,12 @@ public class Vacante {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+	
 	@Override
 	public String toString() {
 		return "Vacante [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", fecha=" + fecha
 				+ ", estatus=" + estatus + ", destacado=" + destacado + ", imagen=" + imagen + ", detalles=" + detalles
 				+ ", categoria=" + categoria + ", salario=" + salario + "]";
 	}
-	
-	
 	
 }

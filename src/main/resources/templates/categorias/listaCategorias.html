@@ -50,12 +50,30 @@
                   <td th:text=${categoria.nombre}></td >
                   <td th:text=${categoria.descripcion}></td >
                   <td>
+                  
                     <a th:href="@{/categoria/buscar(id=${categoria.id})}" class="btn btn-success btn-sm" role="button" title="Editar"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
                     <a th:href="@{/categoria/eliminar(id=${categoria.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar"><i class="fas fa-trash" aria-hidden="true"></i></a>
                   </td>
                 </tr  >              
               </tbody>
+               <tr>
+              	<td colspan="4" th:text="'Total Registros : ' + ${total}"></td >
+              </tr>
             </table>
+                <nav th:if="${categorias.totalPages > 0}" aria-label="Page navigation example" >
+			    	<ul class="pagination justify-content-center">
+			    		<li class="page-item" th:classappend="${categorias.number == 0 ? 'disabled' : ''}">
+			    			<a th:href="@{/categoria/indexPaginado(page=${categorias.number - 1})}" class="page-link">Anterior</a>
+			    		</li>
+			    					
+			    		<li class="page-item" th:classappend="${i eq categorias.number + 1} ? 'active'" th:each="i : ${#numbers.sequence( 1, categorias.totalPages, 1)}">
+			    			<a class="page-link" th:href="@{/categoria/indexPaginado?page={tmpPag} (tmpPag=${i-1}) }" th:text="${i}" th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+			    		</li>
+			    		<li class="page-item" th:classappend="${categorias.number == (categorias.totalPages - 1) ? 'disabled' : ''}">
+			    			<a th:href="@{/categoria/indexPaginado(page=${categorias.number + 1})}" class="page-link">Siguiente</a>
+			    		</li>
+			    	</ul>
+			    </nav>
             
           </div>
         </div>

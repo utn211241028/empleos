@@ -3,6 +3,8 @@ package org.atziri.lopez.soriano.service;
 import java.util.List;
 
 import org.atziri.lopez.soriano.model.Categoria;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface IntCategorias {
 	/*DECLARACIÓN DE LA LOGICA DEL NEGOCIO A IMPLEMENTAR CON 
@@ -16,4 +18,7 @@ public interface IntCategorias {
 	public int totalCategorias();
 	public void modificar(Integer posicion, Categoria categoria);
 	public int buscarPosicion(Categoria categoria);
+
+	//Paginación
+		public Page<Categoria>buscarTodas(Pageable page);
 }

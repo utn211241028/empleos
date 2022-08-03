@@ -3,6 +3,8 @@ package org.atziri.lopez.soriano.service;
 import java.util.List;
 
 import org.atziri.lopez.soriano.model.Vacante;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface IntVacantes {
 	
@@ -11,6 +13,7 @@ public interface IntVacantes {
 	public void eliminar(Integer idVacante);
 	public Vacante buscarPorId(Integer idVacante);
 	public long numeroVacantes();
-	public void modificar(Integer posicion, Vacante vacante);
-	public int buscarPosicion(Vacante vacante);
+	
+	//Paginación
+	public Page<Vacante>buscarTodas(Pageable page);
 }

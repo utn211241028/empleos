@@ -46,7 +46,7 @@
               <tbody>
                 <tr th:each="vacante:${vacantes}">
                   <td th:text="${vacante.id}"></td> 
-                  <td th:text="${vacante.categoria.nombre}"></td>
+                  <td th:text="${vacante.nombre}"></td>
                   <td th:text="${vacante.nombre}"></td >
                   <td th:text="${vacante.fecha}"></td >                  
                   <td th:text="${vacante.salario}"></td >
@@ -57,7 +57,7 @@
                   	<span th:unless="${vacante.destacado == 1}">NO</span >
                   </td>
                   <td>
-                    <a th:href="@{/vacante/buscar(id=${vacante.id})}" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                    <a th:href="@{/vacante/buscar(id=${vacante.id})}" class="btn btn-success btn-sm" role="button" title="Editar"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
                     <a th:href="@{/vacante/eliminar(id=${vacante.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
                  	<a th:href="@{/vacante/detalle(id=${vacante.id})}" class="btn btn-success btn-sm" role="button" title="Detalles del registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
                   </td>

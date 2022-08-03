@@ -7,6 +7,8 @@ import javax.validation.Valid;
 import org.atziri.lopez.soriano.model.Categoria;
 import org.atziri.lopez.soriano.service.IntCategorias;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,14 +27,16 @@ public class CategoriaController implements WebMvcConfigurer{
 	@Autowired
 	private IntCategorias categoriaService;
 
-	@GetMapping("/index")
-	public String mostrarIndex(Model model) {
-		List<Categoria> lista = categoriaService.obtenerTodas();
+	@GetMapping("/indexPaginado")
+	public String mostrarIndex(Model model, Pageable page) {
+		//List<Categoria> lista = categoriaService.obtenerTodas();
+		Page<Categoria> lista = categoriaService.buscarTodas(page);
 		//System.out.println(lista);
 		for(Categoria c : lista) {
 			//System.out.println(c.getNombre());
 		}
 		model.addAttribute("categorias", lista);
+		model.addAttribute("total", categoriaService.obtenerTodas().size());
 		return "categorias/listaCategorias";
 	}
 	
@@ -75,35 +79,38 @@ public class CategoriaController implements WebMvcConfigurer{
 			RedirectAttributes model) {
 		if(result.hasErrors()) {
 			System.out.println("Error");
+		
 			return "categorias/formCategoria";
 		}else {
 		//System.out.println(categoria);
-		if ( categoria.getId() == null) {
+		/*if ( categoria.getId() == null) {
 			int index = categoriaService.obtenerTodas().size()-1;
 			Categoria aux = categoriaService.obtenerTodas().get(index);
 			categoria.setId(aux.getId()+1);
 			model.addFlashAttribute("msg", "Se guardo la categoría");
 			categoriaService.agregar(categoria);
-		}else {
-			int posicion = categoriaService.buscarPosicion(categoria);
+		}else {*/
+		/*	int posicion = categoriaService.buscarPosicion(categoria);
 			//System.out.println(posicion);
 			model.addFlashAttribute("msg", "Se modificó la categoría");
-			categoriaService.modificar(posicion, categoria);
-		}
+			categoriaService.modificar(posicion, categoria);*/
+		
 	/*	categoria.setId(categoriaService.obtenerTodas().size()+1);
 		System.out.println(categoria);
 		categoriaService.agregar(categoria);*/
-		
-		return "redirect:/categoria/index";
+		model.addFlashAttribute("msg", "Se guardo la categoría");
+		categoriaService.agregar(categoria);
+		}
+		return "redirect:/categoria/indexPaginado";
 	}
-	}
+	
 	@GetMapping("/eliminar")
 	public String eliminar(
 			@RequestParam("id") int idCategoria,
 			RedirectAttributes model) {
 		categoriaService.eliminar(idCategoria);
 		model.addFlashAttribute("msg", "Categoría eliminada");
-		return "redirect:/categoria/index";
+		return "redirect:/categoria/indexPaginado";
 	}
 	
 	@GetMapping("/buscar")

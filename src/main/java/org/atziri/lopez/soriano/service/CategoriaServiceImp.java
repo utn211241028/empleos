@@ -2,12 +2,20 @@ package org.atziri.lopez.soriano.service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
+import org.atziri.lopez.soriano.db.CategoriasRepository;
 import org.atziri.lopez.soriano.model.Categoria;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service 
 public class CategoriaServiceImp implements IntCategorias {
+	
+	@Autowired
+	private CategoriasRepository repoCategorias;
 	
 	//Agregar atributo
 	private List<Categoria> lista = null;
@@ -39,33 +47,31 @@ public class CategoriaServiceImp implements IntCategorias {
 	
 	@Override
 	public List<Categoria> obtenerTodas() {
-		return lista;
+		return repoCategorias.findAll();
 	}
 
 	@Override
 	public void agregar(Categoria categoria) {
-		lista.add(categoria);
+		repoCategorias.save(categoria);
 	}
 
 	@Override
 	public Categoria buscarPorId(Integer idCategoria) {
-		for(Categoria categoria : lista) {
-			if ( categoria.getId() == idCategoria) {
-				return categoria;
-			}
+		Optional<Categoria> optional = repoCategorias.findById(idCategoria);
+		if(optional.isPresent()) {
+			return optional.get();
 		}
 		return null;
 	}
 
 	@Override
 	public void eliminar(Integer idCategoria) {
-		lista.remove(buscarPorId(idCategoria));
-
+		repoCategorias.deleteById(idCategoria);
 	}
 
 	@Override
 	public int totalCategorias() {
-		return lista.size();
+		return (int) repoCategorias.count();
 	}
 
 	@Override
@@ -87,4 +93,10 @@ public class CategoriaServiceImp implements IntCategorias {
 		
 	} return posicion;
 }
+
+	@Override
+	public Page<Categoria> buscarTodas(Pageable page) {
+		// TODO Auto-generated method stub
+		return repoCategorias.findAll(page);
+	}
 }

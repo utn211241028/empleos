@@ -1,19 +1,19 @@
 package org.atziri.lopez.soriano.controller;
 
 import java.beans.PropertyEditorSupport;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.validation.Valid;
 
-import org.atziri.lopez.soriano.model.Categoria;
 import org.atziri.lopez.soriano.model.Vacante;
 import org.atziri.lopez.soriano.service.IntCategorias;
 import org.atziri.lopez.soriano.service.IntVacantes;
 import org.atziri.lopez.soriano.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/vacante")
@@ -43,11 +42,13 @@ public class VacantesController {
 		model.addAttribute("categorias", categoriasService.obtenerTodas());
 	}
 	
-	@GetMapping("/index")
+	@GetMapping("/indexPaginado")
 	public String mostrarIndex(Model model) {
+		//List<Vacante> lista = vacantesService.obtenerTodas();
 		List<Vacante> lista = vacantesService.obtenerTodas();
 		System.out.println(lista);
 		model.addAttribute("vacantes", lista);
+		model.addAttribute("total", vacantesService.obtenerTodas().size());
 		return "vacantes/listaVacantes";
 	}
 	
@@ -63,7 +64,7 @@ public class VacantesController {
 	public String eliminar(
 			@RequestParam("id") int idVacante) {
 		vacantesService.eliminar(idVacante);
-		return "redirect:/vacante/index";	
+		return "redirect:/vacante/indexPaginado";	
 	}
 	
 	@GetMapping("/nueva")
@@ -81,7 +82,7 @@ public class VacantesController {
 		}
 		if(!multiPart.isEmpty()) {
 			//String ruta = "empleos/img-vacantes/"; // Linux/MAC
-			String ruta = "///c:/empleos/img-vacantes"; //Windows
+			String ruta = "c:/empleos/img-vacantes/"; //Windows
 			String nombreImagen = Utileria.guardarArchivo(multiPart, ruta);
 			if(nombreImagen != null) { // La imagen si se subio
 				// Procesamos la variable nombreImagen
@@ -93,41 +94,9 @@ public class VacantesController {
 		vacante.setId(aux.getId() + 1);
 		vacante.setCategoria(categoriasService.buscarPorId(vacante.getCategoria().getId()));
 		vacantesService.guardar(vacante);
-		return "redirect:/vacante/index";
+		return "redirect:/vacante/indexPaginado";
 	}
 	
-	
-	/*@PostMapping("/guardar")
-	public String guardar(
-			@Valid
-			Vacante vacante, 
-			BindingResult result,
-			RedirectAttributes model) {
-		if(result.hasErrors()) {
-			System.out.println("Error");
-			return "vacantes/formCategoria";
-		}else {
-		//System.out.println(categoria);
-		if ( vacante.getId() == null) {
-			int index = vacantesService.obtenerTodas().size()-1;
-			Vacante aux = vacantesService.obtenerTodas().get(index);
-			vacante.setId(aux.getId()+1);
-			model.addFlashAttribute("msg", "Se guardo la categoría");
-			vacantesService.guardar(vacante);
-		}else {
-			int posicion = vacantesService.buscarPosicion(vacante);
-			//System.out.println(posicion);
-			model.addFlashAttribute("msg", "Se modificó la categoría");
-			vacantesService.modificar(posicion, vacante);
-		}
-	/*	categoria.setId(categoriaService.obtenerTodas().size()+1);
-		System.out.println(categoria);
-		categoriaService.agregar(categoria);*/
-	
-	/*	return "redirect:/vacante/index";
-	}
-	}
-	*/
 	@InitBinder
 	protected void  initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport(){
@@ -141,7 +110,6 @@ public class VacantesController {
 			}
 		});
 	}
-	
 	@GetMapping("/buscar")
 	public String buscar(@RequestParam("id") int idVacante, Model model) {
 		Vacante vacante = vacantesService.buscarPorId(idVacante);
