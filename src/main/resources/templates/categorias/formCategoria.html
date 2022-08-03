@@ -13,13 +13,12 @@
     <!-- Custom styles for this template -->
     <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
     <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
   </head>
 
   <body>
 
-    <header th:insert="fragmentos/menu.html::menu-principal">
-      
-    </header >
+    <header th:insert="fragmentos/menu.html::menu-principal"></header >
 
     <main role="main">     
       <hr>
@@ -32,10 +31,10 @@
               <div class="row">
                 <div class="col-md-6"> 
                   <div class="form-group">
-				  <input type="hidden" th:field="*{id}">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" th:field="*{nombre}" class="form-control" id="nombre" name="nombre" placeholder="Escriba el nombre de la categoria" required="required">
-                  	<span class="badge text-danger" role="alert"
+                  <input type="hidden" th:field="*{id}">
+                    <label for="nombre" >Nombre</label>
+                    <input type="text" th:field="*{nombre}" class="form-control" id="nombre" name="nombre" placeholder="Escriba el nombre de la categoria">
+                  	  <span class="badge text-danger" role="alert"
                   		th:if"${#fields.hasErrors('nombre')}"
                   		th:errors="*{nombre}"></span >
                   </div>
@@ -45,10 +44,11 @@
                 <div class="col-md-6"> 
                   <div class="form-group">
                     <label for="descripcion">Descripción</label>
-                    <textarea class="form-control" th:field="*{descripcion}" name="descripcion" id="descripcion" rows="2"></textarea>
-                  	<span class="badge text-danger" role="alert"
+                    <textarea class="form-control" name="descripcion"  th:field="*{descripcion}" id="descripcion" rows="2"></textarea>
+                                      	<span class="badge text-danger" role="alert"
                   		th:if"${#fields.hasErrors('descripcion')}"
                   		th:errors="*{descripcion}"></span >
+                  </div> 
                   </div> 
                 </div>                
               </div> 
@@ -68,7 +68,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script th:src="@{/bootstrap/js/jquery-3.6.0.min.js}"></script>
-    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>  
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script th:src="@{/boostrap/js/bootstrap.min.js}"></script>     
   </body>
 </html>
